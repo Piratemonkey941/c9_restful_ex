@@ -1,38 +1,32 @@
-<%= form_with( model: post) do |form| %> <% if product.errors.any? %>
-    <div style="color: red">
-        <h2>
-            <%= pluralize(post.errors.count, "error") %> prohibited this post from
-            being saved:
-        </h2>
 
-        <ul>
-            <% post.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-            <% end %>
-        </ul>
-    </div>
-<% end %>
   
-  
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.text_area :body %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+<%= form_with(model: @post) do |form| %> <% if @post.errors.any? %>
+  <div style="color: red">
+    <% post.errors.each do |error| %> 
+      <div ><%= error.full_messages%></div>
+    <% end %>
   </div>
 <% end %>
+ 
 
-<%= link_to 'Back', posts_new_path %>
+<div >
+  <%= form.label :title%> 
+  <%= form.text_field :title %>
 
-<% if flash[:error] %>
-    <div class="error> 
-        <% flash[:error] %>
-    </div>  
+</div>
+
+<div>
+  <%= form.label :body%> 
+  <%= form.text_field :body %>
+  <div>
+    <% if @post.errors.details[:body].any?%> 
+      <% @post.errors.details[:body].each do |error| %> 
+        <%= error[:error] %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div><%= form.submit%></div>
 <% end %>
+
