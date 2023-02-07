@@ -7,13 +7,24 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="">About Us</a>
-        </li>
+        
         <li class="nav-item">
           <a class="nav-link" href="<%= posts_path %>"> Posts</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= new_post_path %>"> New Posts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= search_posts_path %>"> Search</a>
+        </li>
+        
       </ul>
+
+  <%= form_tag search_posts_path, method: :get do %>
+  <%= text_field_tag :query, params[:query], placeholder: "Search posts..." %>
+  <%= submit_tag "Search", class: "btn btn-primary" %>
+<% end %>
+
       
     </div>
   </div>

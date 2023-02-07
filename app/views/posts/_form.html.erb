@@ -9,13 +9,13 @@
 <% end %>
  
 
-<div >
+<div  class="mb-2">
   <%= form.label :title%> 
   <%= form.text_field :title %>
 
 </div>
 
-<div>
+<div class="mb-2">
   <%= form.label :body%> 
   <%= form.text_field :body %>
   <div>
@@ -26,7 +26,10 @@
     <% end %>
   </div>
 </div>
-
-<div><%= form.submit%></div>
+<div class="d-flex justify-content-center m-1">
+  <div class="your-class">
+    <%= form.submit%>
+    </div>
+  </div>
 <% end %>
 

@@ -2,8 +2,18 @@ class PostsController < ApplicationController
 
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
+  def search
+    @posts = Post.search(params[:query])
+  end
+
   def index
     @posts = Post.all
+
+    if params[:query].present?
+      @posts = Post.where("title LIKE ? OR body LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
+    else
+      @posts = Post.all
+    end
   end
 
   # ===========================================================
@@ -76,30 +86,3 @@ end
 
 
 # =============================GRAVEYARD========================
-# <%= form_with(model: @post) do |form| %>
-#   <% if @post.errors.any? %>
-#     <% @post.errors.full_messages.each do |message| %> 
-#       <div><%= message %></div>
-#     <% end %>
-#   <% end %>
-  
-#   <div>
-#     <%= form.label :title%> 
-#     <%= form.text_field :title %>
-  
-#   </div>
-  
-#   <div>
-#     <%= form.label :body%> 
-#     <%= form.text_field :body %>
-#     <div>
-#       <% if @post.errors.details[:body].any?%> 
-#         <% @post.errors.details[:body].each do |error| %> 
-#           <%= error[:error] %>
-#         <% end %>
-#       <% end %>
-#     </div>
-#   </div>
-  
-#   <div><%= form.submit%></div>
-#   <% end %>
