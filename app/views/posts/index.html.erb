@@ -4,33 +4,29 @@
   </div>
 </div>
 
-<div class="d-flex justify-content-start pr-3">
+<div class="d-flex justify-content-center ">
   <div class="your-class">
     <button class="btn" >
     <%= link_to "New post", new_post_path %>
     </button>
   </div>
-
-
-
 </div>
 
+<div class="d-flex justify-content-center ml-5 mr-5">
+  <div class="your-class"  style="margin-left: 1em";>
+    <div id="posts" >
 
-
-
-
-<div class="d-flex justify-content-center m-5">
-  <div class="your-class">
-    <div id="posts">
-
-      <% @posts.each do |post|%>
-        <h3><%= post.title%></h3>
-        <p><%= post.body%></p>
+      <% @posts[(@page - 1) * 10, 10].each do |post| %>
+        <h3><%= post.title %></h3>
+        <p><%= post.body %></p>
       <% end %>
+      <div class="text-center">
+        <%= link_to "Previous", posts_path(page: @page - 1) unless @page == 1 %>
+        <%= link_to "Next", posts_path(page: @page + 1) if @posts.size > (@page * 10) %>
+      </div>
     </div>
   </div>
 </div>
-
 <div class="d-flex justify-content-center">
   <div class="your-class">
     <button class="btn" >

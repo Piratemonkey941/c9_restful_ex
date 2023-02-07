@@ -8,12 +8,13 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    @page = params[:page].to_i || 1
 
     if params[:query].present?
-      @posts = Post.where("title LIKE ? OR body LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
-    else
-      @posts = Post.all
+      @posts = @posts.where("title LIKE ? OR body LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
     end
+    
+    @posts = @posts.limit(10).offset((@page - 1) * 10)
   end
 
   # ===========================================================
