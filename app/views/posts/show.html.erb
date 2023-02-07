@@ -1,6 +1,12 @@
 <h1><%= @post.title %></h1>
 <p><%= @post.body %></p>
 
+<h2>Comments:</h2>
+<ul>
+  <% @comments.each do |comment| %>
+    <li><%= comment.content %></li>
+  <% end %>
+</ul>
 
 <div>
   <%= link_to "Edit this post", edit_post_path(@post) %> |  <%= link_to "Back to posts", posts_path %> 

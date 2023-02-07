@@ -9,9 +9,18 @@
 
 require 'faker'
 
-50.times do
+10.times do
   Post.create(
     title: Faker::Lorem.sentence(word_count: 6),
-    body: Faker::Lorem.paragraph(sentence_count: 10)
+    body: Faker::Lorem.paragraph(sentence_count: 8)
+  )
+end
+
+post_ids = Post.pluck(:id)
+
+50.times do
+  Comment.create(
+    content: Faker::Lorem.paragraph,
+    post_id: post_ids.sample
   )
 end
